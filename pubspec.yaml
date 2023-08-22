@@ -7,6 +7,8 @@ environment:
 
 dependencies: 
   cupertino_icons: ^1.0.2
+  flutter_spinkit:
+  modal_progress_hud_nsn:
   get: 4.6.5
   flutter: 
     sdk: flutter
@@ -21,4 +23,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/splashimg/
+    - assets/logo/
 

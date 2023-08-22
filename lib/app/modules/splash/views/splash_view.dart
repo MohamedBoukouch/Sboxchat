@@ -1,38 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
+import 'package:sboxchat/app/modules/home/views/home_view.dart';
 
-import 'package:get/get.dart';
-import 'package:sboxchat/app/modules/splash/widgets/buttonSplash.dart';
-import 'package:get/get.dart';
+import '../../../config/constants/app_constant.dart';
 import '../../../config/images/app_images.dart';
-import '../controllers/splash_controller.dart';
-import '../pages/splash2.dart';
-import '../widgets/loading.dart';
 
-class SplashView extends GetView<SplashController> {
+class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
+
+  @override
+  _SplashViewState createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    autoNavigation();
+    super.initState();
+  }
+
+  void autoNavigation() async {
+    // you can change delay here
+    await Future.delayed(Duration(seconds: 1));
+    Get.to(HomeView());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Loading(
-              isshow: true,
+      body: Column(
+        children: [
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(top: AppConstant.screenHeight * .4),
+              width: AppConstant.screenHeight * 0.3,
+              child: Image.asset(AppMessage.logo), // Corrected constant name
             ),
-            Loading(
-              isshow: false,
+          ),
+          const Center(
+            child: SpinKitFadingCircle(
+              size: 50,
+              color: Colors.orange,
             ),
-            Loading(
-              isshow: false,
-            ),
-          ],
-        ),
-        Image.asset(AppMessage.spl_1),
-        Text("PAGE 1"),
-        InkWell(onTap: () => Get.to(const Splash2()), child: ButtonSplash()),
-      ],
-    ));
+          ),
+        ],
+      ),
+    );
   }
 }
